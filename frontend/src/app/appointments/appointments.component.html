@@ -1,0 +1,143 @@
+<div class="container mt-4">
+    <h2>Schedule Appointment</h2>
+  
+    <!-- Success/Error Message -->
+    <div *ngIf="message" class="alert" [ngClass]="messageType === 'success' ? 'alert-success' : 'alert-danger'">
+      {{ message }}
+    </div>
+  
+    <form (ngSubmit)="addAppointment()" #appointmentForm="ngForm">
+      <!-- Patient Name -->
+      <div class="form-group">
+        <label for="patient_name">Patient Name</label>
+        <input
+          type="text"
+          id="patient_name"
+          class="form-control"
+          [(ngModel)]="newAppointment.patient_name"
+          name="patient_name"
+          required
+        />
+      </div>
+  
+      <!-- Doctor Name -->
+      <div class="form-group">
+        <label for="doctor_name">Select Doctor</label>
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Dr.</div>
+            </div>
+            <select
+            id="doctor_name"
+            class="form-control"
+            [(ngModel)]="newAppointment.doctor_id"
+            name="doctor_id"
+            required
+          >
+            <option value="" disabled>Select a doctor</option>
+            <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.doctor_name }}</option>
+          </select>
+          </div>
+       
+      </div>
+  
+      <!-- Appointment Date -->
+      <div class="form-group">
+        <label for="appointment_date">Appointment Date</label>
+        <input
+          type="datetime-local"
+          id="appointment_date"
+          class="form-control"
+          [(ngModel)]="newAppointment.appointment_date"
+          name="appointment_date"
+          required
+        />
+      </div>
+  
+      <!-- Reason -->
+      <div class="form-group">
+        <label for="reason">Reason for Appointment</label>
+        <input
+          type="text"
+          id="reason"
+          class="form-control"
+          [(ngModel)]="newAppointment.reason"
+          name="reason"
+          required
+        />
+      </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Add Appointment</button>          
+        </div>
+            
+    </form>
+	
+    <!-- Appointment List -->
+    <table class="table table-bordered table-hover table-responsive">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Doctor Name</th>
+          <th>Date</th>
+          <th>Reason</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments">
+          <td>{{ appointment.patient_name }}</td>
+          <td>Dr. {{ appointment.first_name }} {{ appointment.last_name }}</td>
+          <td>{{ appointment.appointment_date | date : 'd MMM yyyy, hh:mm a'}}</td>
+          <td>{{ appointment.reason }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="confirmDelete(appointment.id)" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Delete Modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this appointment?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteAppointment()"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
