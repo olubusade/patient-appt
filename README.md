@@ -4,7 +4,6 @@ This is a web-based **Patient Appointment Scheduling System** designed for healt
 
 ## Features
 
-- **User Roles & Authentication**: Supports role-based access control (RBAC) for different users, including front desk staff, nurses, doctors, and admin.
 - **Appointment Management**: Allows users to create, update, delete, and view appointments.
 - **Responsive Design**: Mobile-friendly, ensuring smooth user experience on any device.
 - **Form Validation**: Includes form validation to ensure valid inputs for appointment scheduling.
@@ -17,7 +16,6 @@ This is a web-based **Patient Appointment Scheduling System** designed for healt
 - **Frontend**: Angular, Bootstrap
 - **Backend**: Node.js, Express
 - **Database**: MySQL
-- **Authentication**: JWT (JSON Web Token) for user authentication
 - **APIs**: RESTful API endpoints for handling appointment data
 
 ## Prerequisites
@@ -51,7 +49,7 @@ npm install
 Create a database for the application and configure it in the `config.js` file in the backend.
 
 ```sql
-CREATE DATABASE appointment_system;
+CREATE DATABASE emr_appt;
 ```
 
 Create the necessary tables:
@@ -83,7 +81,7 @@ Create a `.env` file in the root of the backend folder with the following config
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=
-DB_NAME=emr-appt
+DB_NAME=emr_appt
 ```
 
 ### 5. Install Frontend Dependencies
@@ -128,7 +126,7 @@ The frontend will be available at `http://localhost:4200` and the backend API wi
 
 - **Appointment Form**: Allows patients and healthcare professionals to schedule an appointment.
 - **Appointment Table**: Displays all appointments in a table format, allowing users to manage them.
-- **Non-hardcoding Doctor record**: Displays all doctors record, allowing users to select one during appointment.
+- **Non-hardcoding Doctor records Fetch**: Displays all doctors record, allowing users to select one during appointment.
 
 ## Form Validation
 
